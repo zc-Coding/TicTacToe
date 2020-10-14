@@ -1,0 +1,35 @@
+/* This container includes our table and our canvas. */
+.center-container {
+    width: 608;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+table {
+    /* this property collapse table borders into 1 border */
+    border-collapse: collapse;
+    /* this hides outer borders on the table table */
+    border-style: hidden;
+}
+
+td {
+    cursor: pointer;
+    border: 8px solid rgb(51, 155, 253);
+    /* this property removes default padding */
+    padding: 0px;
+    width: 200px;
+    height: 200px;
+}
+
+canvas {
+    position: absolute;
+    z-index: 10;
+    /* this property makes out canvas invisible */
+    pointer-events: none;
+}
+
+/* h1 element styling */
+h1 {
+    position: relative;
+    text-align: center;
+}
