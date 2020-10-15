@@ -86,7 +86,7 @@ function disableClick() {
 }
 
 function audio(audioURL) {
-    let audio = new Audio('media/place.mp3');
+    let audio = new Audio(audioURL);
     audio.play();
 }
 
