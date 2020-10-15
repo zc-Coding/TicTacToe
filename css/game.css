@@ -24,7 +24,6 @@ td {
 }
 
 canvas {
-    position: absolute;
     z-index: 10;
     /* this property makes out canvas invisible */
     pointer-events: none;
@@ -34,5 +33,15 @@ canvas {
 h1 {
     position: relative;
     text-align: center;
+}
+
+.center-container {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#win-lines {
+    margin-left: auto;
+    margin-right: auto;
 }
 
