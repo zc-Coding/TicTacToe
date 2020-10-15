@@ -20,7 +20,7 @@ function placeXOrO(squareNumber) {
         } else {
             activePlayer = 'X';
         }
-        audio();
+        audio("media/place.mp3");
         if(activePlayer === 'O') {
             disableClick();
             setTimeout(function () {computersTurn(); }, 1000);
@@ -64,7 +64,7 @@ function checkWinConditions() {
         //this function plays the tie game sound
         audio('media/tie.mp3');
         //this is a .3 second break before reset game is called
-        setTimeout(function () { resetgame();}, 1000);
+        setTimeout(function () { resetGame();}, 1000);
     }
     //this function checks if an array includes 3 strings
     //it is used to check for each win condition
