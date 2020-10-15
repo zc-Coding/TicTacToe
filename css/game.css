@@ -10,6 +10,8 @@ table {
     border-collapse: collapse;
     /* this hides outer borders on the table table */
     border-style: hidden;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 td {
@@ -33,3 +35,4 @@ h1 {
     position: relative;
     text-align: center;
 }
+
