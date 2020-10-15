@@ -20,10 +20,10 @@ function placeXOrO(squareNumber) {
         } else {
             activePlayer = 'X';
         }
-        Audio('./media/place.mp3');
+        audio();
         if(activePlayer === 'O') {
             disableClick();
-            setTimeout(function () {computersTurn();}, 1000)
+            setTimeout(function () {computersTurn(); }, 1000);
         }
         return true;
     }
@@ -62,7 +62,7 @@ function checkWinConditions() {
     else if (arrayIncludes('0O','4O','8O')) { drawWinLine(100,100,520,520); }
     else if (selectedSquares.length >= 9) {
         //this function plays the tie game sound
-        Audio('./media/tie.mp3');
+        audio('media/tie.mp3');
         //this is a .3 second break before reset game is called
         setTimeout(function () { resetgame();}, 1000);
     }
@@ -77,4 +77,64 @@ function checkWinConditions() {
         //returned and out else if condition executes the drawWinLine function
         if (a === true && b === true && c === true) { return true;}
     }
+}
+
+//This function makes our body element unclickable
+function disableClick() {
+    body.style.pointerEvents = 'none';
+    setTimeout(function () {body.style.pointerEvents = 'auto';}, 1000)
+}
+
+function audio(audioURL) {
+    let audio = new Audio('media/place.mp3');
+    audio.play();
+}
+
+// this finction utilizes html canvas to draw win lines.
+function drawWinLine(coordX1, coordY1, coordX2, coordY2) {
+    const canvas = document.getElementById('win-lines');
+    const c = canvas.getContext('2d');
+    let x1 = coordX1,
+        y1 = coordY1,
+        x2 = coordX2,
+        y2 = coordY2,
+        x = x1,
+        y = y1;
+    function animateLineDrawing() {
+        const animationLoop = requestAnimationFrame(animateLineDrawing);
+        c.clearRect(0, 0, 608, 608);
+        c.beginPath();
+        c.moveTo(x1, y1);
+        c.lineTo(x, y);
+        c.lineWidth = 10;
+        c.strokeStyle = 'rgba(70, 255, 33, .8)';
+        c.stroke();
+        if (x1 <= x2 && y1 <= y2) {
+            if (x < x2) { x += 10;}
+            if (y < y2) { y += 10;}
+            if (x >= x2 && y >= y2) { cancelAnimationFrame(animationLoop); }
+        }
+        if (x1 <= x2 && y1 >= y2) {
+            if (x < x2) { x += 10; }
+            if (y > y2) { y -= 10; }
+            if (x >= x2 && y <= y2) { cancelAnimationFrame(animationLoop); }
+        }
+    }
+    function clear() {
+        const animationLoop = requestAnimationFrame(clear);
+        c.clearRect(0, 0, 608, 608);
+        cancelAnimationFrame(animationLoop)
+    }
+    disableClick();
+    audio('media/winGame.mp3');
+    animateLineDrawing();
+    setTimeout(function() { clear(); resetGame(); }, 1000);
+}
+
+function resetGame() {
+    for (let i = 0; i < 9; i++){
+        let square = document.getElementById(String(i));
+        square.style.backgroundImage = '';
+    }
+    selectedSquares= [];
 }
